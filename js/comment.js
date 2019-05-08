@@ -244,7 +244,7 @@ if (!window['String']['prototype']['trim']) {
         } else {
           userInfo = {};
         }
-        // 默认头像路径 /img/jelon.jpg
+        // 默认头像路径 /img/tris.jpg
         $('JELON__loginAvatar').src = userInfo.avatar_url || '/img/unsigned_avatar.jpg';
       }
     },
