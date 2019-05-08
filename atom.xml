@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2019-05-08T07:14:13.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://shironghui.github.io/"/>
+  <updated>2019-05-08T08:20:09.000Z</updated>
+  <id>http://shironghui.github.io/</id>
   
   <author>
     <name>Shi ronghui</name>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>java class</title>
-    <link href="http://yoursite.com/2019/05/08/java-class/"/>
-    <id>http://yoursite.com/2019/05/08/java-class/</id>
+    <link href="http://shironghui.github.io/2019/05/08/java-class/"/>
+    <id>http://shironghui.github.io/2019/05/08/java-class/</id>
     <published>2019-05-08T03:48:05.000Z</published>
-    <updated>2019-05-08T07:14:13.000Z</updated>
+    <updated>2019-05-08T08:20:09.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="简单的讲，JAVA中的面向对象主要应用于类（class）"><a href="#简单的讲，JAVA中的面向对象主要应用于类（class）" class="headerlink" title="简单的讲，JAVA中的面向对象主要应用于类（class）"></a>简单的讲，JAVA中的面向对象主要应用于类（class）</h3><p><strong>在java中，类主要包括以下若干概念：常量、变量、构造函数、普通方法、析构函数，先简单介绍下基础，然后看一段Demo代码，看看你对java中的 类 理解如何</strong></p><ul><li>java关键字final用在变量的前面表示变量的值不可以改变，称为常量；</li><li>静态变量在内存中是共享的，与实例变量不同；</li><li>静态代码块在类加载时运行；</li><li>任何 Java 类都可以覆盖Object类提供的 protected 类型的 finalize() 方法作为析构方法，析构方法与构造方法相反，当对象销毁时自动执行。</li></ul><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package com.company.ronghui.shi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> int number = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    Counter() &#123;</span><br><span class="line">        init();</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> void init() &#123;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> int getCount() &#123;</span><br><span class="line">        <span class="keyword">return</span> number;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> void finalize() &#123;</span><br><span class="line">        number--;</span><br><span class="line">        System.out.println(<span class="string">"Final number: "</span> + number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package com.company.ronghui.shi;</span><br><span class="line"></span><br><span class="line">import java.lang.String;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> void main(String args[]) &#123;</span><br><span class="line">        run();</span><br><span class="line">        Runtime.getRuntime().gc();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> void run() &#123;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= <span class="number">3</span>; i++) &#123;</span><br><span class="line">            System.out.println((<span class="keyword">new</span> Counter()).getCount());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h4 id="正确答案"><a href="#正确答案" class="headerlink" title="正确答案"></a>正确答案</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">5</span><br><span class="line">7</span><br><span class="line">Final number: 6</span><br><span class="line">Final number: 5</span><br><span class="line">Final number: 4</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -34,35 +34,10 @@
     
     </summary>
     
-      <category term="PHP" scheme="http://yoursite.com/categories/PHP/"/>
-    
-      <category term="Java" scheme="http://yoursite.com/categories/PHP/Java/"/>
-    
-      <category term="Python" scheme="http://yoursite.com/categories/PHP/Java/Python/"/>
+      <category term="PHP" scheme="http://shironghui.github.io/categories/PHP/"/>
     
     
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2019/05/07/hello-world/"/>
-    <id>http://yoursite.com/2019/05/07/hello-world/</id>
-    <published>2019-05-07T10:07:00.000Z</published>
-    <updated>2019-05-07T10:07:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
-    
-    </summary>
-    
+      <category term="java" scheme="http://shironghui.github.io/tags/java/"/>
     
   </entry>
   
