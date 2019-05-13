@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://shironghui.github.io/"/>
-  <updated>2019-05-08T08:20:09.000Z</updated>
+  <updated>2019-05-13T14:14:09.000Z</updated>
   <id>http://shironghui.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>java class</title>
+    <title>Java 类与对象</title>
     <link href="http://shironghui.github.io/2019/05/08/java-class/"/>
     <id>http://shironghui.github.io/2019/05/08/java-class/</id>
     <published>2019-05-08T03:48:05.000Z</published>
-    <updated>2019-05-08T08:20:09.000Z</updated>
+    <updated>2019-05-13T14:14:09.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="简单的讲，JAVA中的面向对象主要应用于类（class）"><a href="#简单的讲，JAVA中的面向对象主要应用于类（class）" class="headerlink" title="简单的讲，JAVA中的面向对象主要应用于类（class）"></a>简单的讲，JAVA中的面向对象主要应用于类（class）</h3><p><strong>在java中，类主要包括以下若干概念：常量、变量、构造函数、普通方法、析构函数，先简单介绍下基础，然后看一段Demo代码，看看你对java中的 类 理解如何</strong></p><ul><li>java关键字final用在变量的前面表示变量的值不可以改变，称为常量；</li><li>静态变量在内存中是共享的，与实例变量不同；</li><li>静态代码块在类加载时运行；</li><li>任何 Java 类都可以覆盖Object类提供的 protected 类型的 finalize() 方法作为析构方法，析构方法与构造方法相反，当对象销毁时自动执行。</li></ul><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package com.company.ronghui.shi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> int number = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    Counter() &#123;</span><br><span class="line">        init();</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> void init() &#123;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> int getCount() &#123;</span><br><span class="line">        <span class="keyword">return</span> number;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> void finalize() &#123;</span><br><span class="line">        number--;</span><br><span class="line">        System.out.println(<span class="string">"Final number: "</span> + number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package com.company.ronghui.shi;</span><br><span class="line"></span><br><span class="line">import java.lang.String;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> void main(String args[]) &#123;</span><br><span class="line">        run();</span><br><span class="line">        Runtime.getRuntime().gc();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> void run() &#123;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= <span class="number">3</span>; i++) &#123;</span><br><span class="line">            System.out.println((<span class="keyword">new</span> Counter()).getCount());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h4 id="正确答案"><a href="#正确答案" class="headerlink" title="正确答案"></a>正确答案</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">5</span><br><span class="line">7</span><br><span class="line">Final number: 6</span><br><span class="line">Final number: 5</span><br><span class="line">Final number: 4</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -34,10 +34,63 @@
     
     </summary>
     
+      <category term="Java" scheme="http://shironghui.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://shironghui.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 基础知识</title>
+    <link href="http://shironghui.github.io/2018/05/13/Python-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://shironghui.github.io/2018/05/13/Python-基础知识/</id>
+    <published>2018-05-13T13:58:16.000Z</published>
+    <updated>2019-05-13T14:24:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="../img/Py.png" alt="PY知识图谱"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;../img/Py.png&quot; alt=&quot;PY知识图谱&quot;&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="Python" scheme="http://shironghui.github.io/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="http://shironghui.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP 基础知识</title>
+    <link href="http://shironghui.github.io/2017/05/13/PHP-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://shironghui.github.io/2017/05/13/PHP-基础知识/</id>
+    <published>2017-05-13T13:53:31.000Z</published>
+    <updated>2019-05-13T14:13:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="主流框架"><a href="#主流框架" class="headerlink" title="主流框架"></a>主流框架</h3><ul><li>入门学习框架：ThinkPHP</li><li>主流高端框架：Laravel, Yii, CI, Zend Framework</li><li>其他特色框架：Symfony, Phalcon, CakePHP等</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;主流框架&quot;&gt;&lt;a href=&quot;#主流框架&quot; class=&quot;headerlink&quot; title=&quot;主流框架&quot;&gt;&lt;/a&gt;主流框架&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;入门学习框架：ThinkPHP&lt;/li&gt;
+&lt;li&gt;主流高端框架：Laravel, Yii, CI, Zend F
+      
+    
+    </summary>
+    
       <category term="PHP" scheme="http://shironghui.github.io/categories/PHP/"/>
     
     
-      <category term="java" scheme="http://shironghui.github.io/tags/java/"/>
+      <category term="PHP" scheme="http://shironghui.github.io/tags/PHP/"/>
     
   </entry>
   
