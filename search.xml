@@ -4,31 +4,6 @@
   
     
     <entry>
-      <title>Java 类与对象</title>
-      <link href="/2019/05/08/java-class/"/>
-      <url>/2019/05/08/java-class/</url>
-      
-        <content type="html"><![CDATA[<h3 id="简单的讲，JAVA中的面向对象主要应用于类（class）"><a href="#简单的讲，JAVA中的面向对象主要应用于类（class）" class="headerlink" title="简单的讲，JAVA中的面向对象主要应用于类（class）"></a>简单的讲，JAVA中的面向对象主要应用于类（class）</h3><p><strong>在java中，类主要包括以下若干概念：常量、变量、构造函数、普通方法、析构函数，先简单介绍下基础，然后看一段Demo代码，看看你对java中的 类 理解如何</strong></p><ul><li>java关键字final用在变量的前面表示变量的值不可以改变，称为常量；</li><li>静态变量在内存中是共享的，与实例变量不同；</li><li>静态代码块在类加载时运行；</li><li>任何 Java 类都可以覆盖Object类提供的 protected 类型的 finalize() 方法作为析构方法，析构方法与构造方法相反，当对象销毁时自动执行。</li></ul><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package com.company.ronghui.shi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> int number = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    Counter() &#123;</span><br><span class="line">        init();</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> void init() &#123;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> int getCount() &#123;</span><br><span class="line">        <span class="keyword">return</span> number;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> void finalize() &#123;</span><br><span class="line">        number--;</span><br><span class="line">        System.out.println(<span class="string">"Final number: "</span> + number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package com.company.ronghui.shi;</span><br><span class="line"></span><br><span class="line">import java.lang.String;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> void main(String args[]) &#123;</span><br><span class="line">        run();</span><br><span class="line">        Runtime.getRuntime().gc();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> void run() &#123;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= <span class="number">3</span>; i++) &#123;</span><br><span class="line">            System.out.println((<span class="keyword">new</span> Counter()).getCount());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h4 id="正确答案"><a href="#正确答案" class="headerlink" title="正确答案"></a>正确答案</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">5</span><br><span class="line">7</span><br><span class="line">Final number: 6</span><br><span class="line">Final number: 5</span><br><span class="line">Final number: 4</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> Java </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Java </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>编程思想 - OOP|AOP|SOA等术语的理解</title>
       <link href="/2019/05/08/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
       <url>/2019/05/08/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/</url>
@@ -46,6 +21,31 @@
         <tags>
             
             <tag> 编程思想 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java 类与对象</title>
+      <link href="/2019/05/08/java-class/"/>
+      <url>/2019/05/08/java-class/</url>
+      
+        <content type="html"><![CDATA[<h3 id="简单的讲，JAVA中的面向对象主要应用于类（class）"><a href="#简单的讲，JAVA中的面向对象主要应用于类（class）" class="headerlink" title="简单的讲，JAVA中的面向对象主要应用于类（class）"></a>简单的讲，JAVA中的面向对象主要应用于类（class）</h3><p><strong>在java中，类主要包括以下若干概念：常量、变量、构造函数、普通方法、析构函数，先简单介绍下基础，然后看一段Demo代码，看看你对java中的 类 理解如何</strong></p><ul><li>java关键字final用在变量的前面表示变量的值不可以改变，称为常量；</li><li>静态变量在内存中是共享的，与实例变量不同；</li><li>静态代码块在类加载时运行；</li><li>任何 Java 类都可以覆盖Object类提供的 protected 类型的 finalize() 方法作为析构方法，析构方法与构造方法相反，当对象销毁时自动执行。</li></ul><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package com.company.ronghui.shi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Counter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> int number = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    Counter() &#123;</span><br><span class="line">        init();</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> void init() &#123;</span><br><span class="line">        number++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> int getCount() &#123;</span><br><span class="line">        <span class="keyword">return</span> number;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> void finalize() &#123;</span><br><span class="line">        number--;</span><br><span class="line">        System.out.println(<span class="string">"Final number: "</span> + number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package com.company.ronghui.shi;</span><br><span class="line"></span><br><span class="line">import java.lang.String;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> void main(String args[]) &#123;</span><br><span class="line">        run();</span><br><span class="line">        Runtime.getRuntime().gc();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> void run() &#123;</span><br><span class="line">        <span class="keyword">for</span> (int i = <span class="number">1</span>; i &lt;= <span class="number">3</span>; i++) &#123;</span><br><span class="line">            System.out.println((<span class="keyword">new</span> Counter()).getCount());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h4 id="正确答案"><a href="#正确答案" class="headerlink" title="正确答案"></a>正确答案</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">5</span><br><span class="line">7</span><br><span class="line">Final number: 6</span><br><span class="line">Final number: 5</span><br><span class="line">Final number: 4</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
             
         </tags>
       
