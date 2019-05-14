@@ -418,11 +418,11 @@
         <script type="text/javascript">
                      var gitment = new Gitment({
                          id: document.location.href,
-                         owner: '{{theme.comment.gitment.githubID}}',
-                         repo: '{{theme.comment.gitment.repo}}',
+                         owner: "theme.comment.gitment.githubID",
+                         repo: "theme.comment.gitment.repo",
                          oauth: {
-                             client_id: '{{theme.comment.gitment.ClientID}}',
-                             client_secret: '{{theme.comment.gitment.ClientSecret}}'
+                             client_id: "theme.comment.gitment.ClientID",
+                             client_secret: "theme.comment.gitment.ClientSecret"
                          }});
                      gitment.render('gitment-container');
                  </script>
