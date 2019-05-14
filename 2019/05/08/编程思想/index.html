@@ -426,20 +426,16 @@
     
   <section id="comments">
   	
-        {% set owner = theme.comment.gitment.githubID %}
-         {% set repo = theme.comment.gitment.repo %}
-         {% set cid = theme.comment.gitment.ClientID %}
-         {% set cs = theme.comment.gitment.ClientSecret %}
         <link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
         <script src="https://jjeejj.github.io/js/gitment.js"></script>
         <script type="text/javascript">
                      var gitment = new Gitment({
                          id: document.location.href,
-                         owner: '{{owner}}',
-                         repo: '{{repo}}',
+                         owner: '{{theme.comment.gitment.githubID}}',
+                         repo: '{{theme.comment.gitment.repo}}',
                          oauth: {
-                             client_id: '{{cid}}',
-                             client_secret: '{{cs}}'
+                             client_id: '{{theme.comment.gitment.ClientID}}',
+                             client_secret: '{{theme.comment.gitment.ClientSecret}}'
                          }});
                      gitment.render('gitment-container');
                  </script>
