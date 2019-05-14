@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://shironghui.github.io/"/>
-  <updated>2019-05-14T10:00:35.000Z</updated>
+  <updated>2019-05-13T14:14:09.000Z</updated>
   <id>http://shironghui.github.io/</id>
   
   <author>
@@ -15,31 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>编程思想 - OOP|AOP|SOA等术语的理解</title>
-    <link href="http://shironghui.github.io/2019/05/08/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
-    <id>http://shironghui.github.io/2019/05/08/编程思想/</id>
-    <published>2019-05-08T03:48:05.000Z</published>
-    <updated>2019-05-14T10:00:35.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="OOP"><a href="#OOP" class="headerlink" title="OOP"></a>OOP</h3><p><strong>OOP，全称：Object Oriented Programming 面向对象编程，是目前几乎所有主流编程语言都支持的编程方式，主要区别于古老的面向过程编程方式。</strong></p><h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p><strong>AOP，全称：Aspect Oriented Programming 面向切面编程，最典型的应用就是Java Spring</strong></p><h3 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h3><p><strong>SOA，全称：Service-Oriented Architecture 面向服务的架构，我们经常所说的微服务就是应用了这种架构思想，但是SOA与微服务并不是同一概念。</strong></p><ul><li>是一种面向通用集成服务的、松耦合的架构实现方式，是web时代服务发展的产物；</li><li>使用”分层”理念，比传统的”观察者”模式更高级且更有优势，主要体现在易扩展性和可灾；</li><li>适用于大型复杂业务系统的数据共享。</li></ul><p><strong>下面是Web电商平台系统比较典型的例子（不全面，但可以帮助理解）</strong></p><p><img src="https://shironghui.github.io/images/soa.png" alt="SOA"></p><p><strong>图中的服务平台可以用不同语言实现，一般大厂多用Java实现，初创公司更偏向于php、python等实现，原因你懂的，比较通用的是RESTFUL接口模式，对于user端，只需明确接口定义，既可以使用HTTP/HTTPS进行通讯，理论上是无限量的。</strong></p><p><strong>SOA对于客户端来说极大的简化了开发周期。对于一个特殊需求的出现不会措手不及，更不会大动干戈重构底层，开发者不需要知道具体底层原理即可快速开发实现功能。</strong></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;OOP&quot;&gt;&lt;a href=&quot;#OOP&quot; class=&quot;headerlink&quot; title=&quot;OOP&quot;&gt;&lt;/a&gt;OOP&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;OOP，全称：Object Oriented Programming 面向对象编程，是目前几乎所有主流编程语言都支持
-      
-    
-    </summary>
-    
-      <category term="编程思想" scheme="http://shironghui.github.io/categories/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
-    
-    
-      <category term="编程思想" scheme="http://shironghui.github.io/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
-    
-  </entry>
   
   <entry>
     <title>Java 类与对象</title>
@@ -63,6 +38,31 @@
     
     
       <category term="Java" scheme="http://shironghui.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编程思想 - OOP|AOP|SOA等术语的理解</title>
+    <link href="http://shironghui.github.io/2019/05/08/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
+    <id>http://shironghui.github.io/2019/05/08/编程思想/</id>
+    <published>2019-05-08T03:48:05.000Z</published>
+    <updated>2019-05-14T10:00:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="OOP"><a href="#OOP" class="headerlink" title="OOP"></a>OOP</h3><p><strong>OOP，全称：Object Oriented Programming 面向对象编程，是目前几乎所有主流编程语言都支持的编程方式，主要区别于古老的面向过程编程方式。</strong></p><h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p><strong>AOP，全称：Aspect Oriented Programming 面向切面编程，最典型的应用就是Java Spring</strong></p><h3 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h3><p><strong>SOA，全称：Service-Oriented Architecture 面向服务的架构，我们经常所说的微服务就是应用了这种架构思想，但是SOA与微服务并不是同一概念。</strong></p><ul><li>是一种面向通用集成服务的、松耦合的架构实现方式，是web时代服务发展的产物；</li><li>使用”分层”理念，比传统的”观察者”模式更高级且更有优势，主要体现在易扩展性和可灾；</li><li>适用于大型复杂业务系统的数据共享。</li></ul><p><strong>下面是Web电商平台系统比较典型的例子（不全面，但可以帮助理解）</strong></p><p><img src="https://shironghui.github.io/images/soa.png" alt="SOA"></p><p><strong>图中的服务平台可以用不同语言实现，一般大厂多用Java实现，初创公司更偏向于php、python等实现，原因你懂的，比较通用的是RESTFUL接口模式，对于user端，只需明确接口定义，既可以使用HTTP/HTTPS进行通讯，理论上是无限量的。</strong></p><p><strong>SOA对于客户端来说极大的简化了开发周期。对于一个特殊需求的出现不会措手不及，更不会大动干戈重构底层，开发者不需要知道具体底层原理即可快速开发实现功能。</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;OOP&quot;&gt;&lt;a href=&quot;#OOP&quot; class=&quot;headerlink&quot; title=&quot;OOP&quot;&gt;&lt;/a&gt;OOP&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;OOP，全称：Object Oriented Programming 面向对象编程，是目前几乎所有主流编程语言都支持
+      
+    
+    </summary>
+    
+      <category term="编程思想" scheme="http://shironghui.github.io/categories/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
+    
+    
+      <category term="编程思想" scheme="http://shironghui.github.io/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
     
   </entry>
   
