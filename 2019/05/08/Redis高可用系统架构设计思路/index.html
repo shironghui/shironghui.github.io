@@ -17,18 +17,18 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Redis 命令手册 | Tris</title>
+  <title>Redis 高可用设计方案 | Tris</title>
   <meta name="description" content="先介绍几个好东西，为最后的成熟方案作准备  Codis 分布式服务框架  Twemproxy 代理服务器">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis 命令手册">
+<meta property="og:title" content="Redis 高可用设计方案">
 <meta property="og:url" content="http://shironghui.github.io/2019/05/08/Redis高可用系统架构设计思路/index.html">
 <meta property="og:site_name" content="小亭子">
 <meta property="og:description" content="先介绍几个好东西，为最后的成熟方案作准备  Codis 分布式服务框架  Twemproxy 代理服务器">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-15T02:27:25.000Z">
+<meta property="og:updated_time" content="2019-05-15T02:31:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis 命令手册">
+<meta name="twitter:title" content="Redis 高可用设计方案">
 <meta name="twitter:description" content="先介绍几个好东西，为最后的成熟方案作准备  Codis 分布式服务框架  Twemproxy 代理服务器">
   <!-- Canonical links -->
   <link rel="canonical" href="http://shironghui.github.io/2019/05/08/Redis高可用系统架构设计思路/index.html">
@@ -257,7 +257,7 @@
                 <a class="category-link" href="/categories/Redis/">Redis</a>
               </p>
               <p class="item-title">
-                <a href="/2019/05/08/Redis常用命令手册/" class="title">Redis 命令手册</a>
+                <a href="/2019/05/08/Redis高可用系统架构设计思路/" class="title">Redis 高可用设计方案</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-05-08T03:48:05.000Z" itemprop="datePublished">2019-05-08</time>
@@ -272,22 +272,7 @@
                 <a class="category-link" href="/categories/Redis/">Redis</a>
               </p>
               <p class="item-title">
-                <a href="/2019/05/08/Redis高可用系统架构设计思路/" class="title">Redis 命令手册</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2019-05-08T03:48:05.000Z" itemprop="datePublished">2019-05-08</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/编程思想/">编程思想</a>
-              </p>
-              <p class="item-title">
-                <a href="/2019/05/08/编程思想/" class="title">编程思想 - OOP|AOP|SOA等术语的理解</a>
+                <a href="/2019/05/08/Redis常用命令手册/" class="title">Redis 命令手册</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-05-08T03:48:05.000Z" itemprop="datePublished">2019-05-08</time>
@@ -303,6 +288,21 @@
               </p>
               <p class="item-title">
                 <a href="/2019/05/08/java-class/" class="title">Java 类与对象</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-05-08T03:48:05.000Z" itemprop="datePublished">2019-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/编程思想/">编程思想</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/05/08/编程思想/" class="title">编程思想 - OOP|AOP|SOA等术语的理解</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-05-08T03:48:05.000Z" itemprop="datePublished">2019-05-08</time>
@@ -345,7 +345,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Redis 命令手册
+      Redis 高可用设计方案
     </h1>
   
 
@@ -403,7 +403,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://shironghui.github.io/2019/05/08/Redis高可用系统架构设计思路/" title="Redis 命令手册" target="_blank" rel="external">http://shironghui.github.io/2019/05/08/Redis高可用系统架构设计思路/</a>
+      <a href="http://shironghui.github.io/2019/05/08/Redis高可用系统架构设计思路/" title="Redis 高可用设计方案" target="_blank" rel="external">http://shironghui.github.io/2019/05/08/Redis高可用系统架构设计思路/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -449,13 +449,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2019/05/08/Redis常用命令手册/" title="Redis 命令手册"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2019/05/08/编程思想/" title="编程思想 - OOP|AOP|SOA等术语的理解"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2019/05/08/Redis常用命令手册/" title="Redis 命令手册"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
@@ -593,7 +589,7 @@ var gitment = new Gitment({
   // id默认为当前页面url，如果url后带参数或锚点，gitment要重新初始化
   // https://github.com/imsun/gitment/issues/55
   // 解决方案：id:window.location.pathname,或者将id设置为当前页面标题
-  id: 'Redis 命令手册', 
+  id: 'Redis 高可用设计方案', 
   owner: 'shironghui', // 可以是你的GitHub用户名，也可以是github id
   repo: 'shironghui.github.io',
   oauth: {
