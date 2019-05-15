@@ -18,18 +18,21 @@
   
   
   <title>Redis 高可用设计方案 | Tris</title>
-  <meta name="description" content="先介绍几个概念知识，为整体架构作铺垫   Codis 分布式服务框架  Twemproxy 代理服务器   首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。 当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。此时，我们想到的是加一台服务器">
+  <meta name="description" content="先介绍几个概念知识，为整体架构作铺垫   Codis 分布式服务框架  Twemproxy 代理服务器   首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。  当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。此时，我们想到的是加一台服务">
 <meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis 高可用设计方案">
 <meta property="og:url" content="http://shironghui.github.io/2019/05/08/Redis高可用系统架构设计思路/index.html">
 <meta property="og:site_name" content="小亭子">
-<meta property="og:description" content="先介绍几个概念知识，为整体架构作铺垫   Codis 分布式服务框架  Twemproxy 代理服务器   首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。 当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。此时，我们想到的是加一台服务器">
+<meta property="og:description" content="先介绍几个概念知识，为整体架构作铺垫   Codis 分布式服务框架  Twemproxy 代理服务器   首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。  当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。此时，我们想到的是加一台服务">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-15T14:28:40.000Z">
+<meta property="og:image" content="https://shironghui.github.io/images/redis-one.jpg">
+<meta property="og:image" content="https://shironghui.github.io/images/redis-cluster.jpg">
+<meta property="og:updated_time" content="2019-05-15T15:06:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis 高可用设计方案">
-<meta name="twitter:description" content="先介绍几个概念知识，为整体架构作铺垫   Codis 分布式服务框架  Twemproxy 代理服务器   首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。 当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。此时，我们想到的是加一台服务器">
+<meta name="twitter:description" content="先介绍几个概念知识，为整体架构作铺垫   Codis 分布式服务框架  Twemproxy 代理服务器   首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。  当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。此时，我们想到的是加一台服务">
+<meta name="twitter:image" content="https://shironghui.github.io/images/redis-one.jpg">
   <!-- Canonical links -->
   <link rel="canonical" href="http://shironghui.github.io/2019/05/08/Redis高可用系统架构设计思路/index.html">
   
@@ -269,21 +272,6 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Redis/">Redis</a>
-              </p>
-              <p class="item-title">
-                <a href="/2019/05/08/Redis高可用系统架构设计思路/" class="title">Redis 高可用设计方案</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2019-05-08T03:48:05.000Z" itemprop="datePublished">2019-05-08</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
                 <a class="category-link" href="/categories/Java/">Java</a>
               </p>
               <p class="item-title">
@@ -303,6 +291,21 @@
               </p>
               <p class="item-title">
                 <a href="/2019/05/08/编程思想/" class="title">编程思想 - OOP|AOP|SOA等术语的理解</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-05-08T03:48:05.000Z" itemprop="datePublished">2019-05-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Redis/">Redis</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/05/08/Redis高可用系统架构设计思路/" class="title">Redis 高可用设计方案</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-05-08T03:48:05.000Z" itemprop="datePublished">2019-05-08</time>
@@ -397,6 +400,7 @@
 </li>
 </ul>
 <p>首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。</p>
+<p><img src="https://shironghui.github.io/images/redis-one.jpg" alt="Redis-Cluster"></p>
 <p>当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。<br>此时，我们想到的是加一台服务器作为从库，实现读写分离。<br>但是如果业务场景出现频繁读数据或频繁写数据，那么此时和单点模式基本相同，此时我们有两种方式可以优化系统：</p>
 <ol>
 <li>我们可以充分利用两台服务器实现双写双读模式，此时需要开发进行大量的编码工作，以保障双写双读的可靠性。</li>
@@ -409,7 +413,9 @@
 <li>突发性故障屏蔽转移需要很大的人力成本</li>
 </ul>
 <p>坦白的说，只要你稍微思考的远一些，站的角度高一些，你会发现上面的系统是最初级的，有很大的优化空间，而且现在的技术发展可以很好的解决以上问题，那就是代理模式。</p>
-<p>说到代理中间件，就用到了一开始简单的介绍的Codis和Twemproxy。 但是代理也不是完美无缺，比如多多少少会影响一些性能，需要购买多余的机器等问题。</p>
+<h3 id="Redis代理方案"><a href="#Redis代理方案" class="headerlink" title="Redis代理方案"></a>Redis代理方案</h3><p>说到代理中间件，就用到了一开始简单的介绍的Codis和Twemproxy。 但是代理也不是完美无缺，比如多多少少会影响一些性能，需要购买多余的机器等问题。</p>
+<h3 id="Redis-Cluster"><a href="#Redis-Cluster" class="headerlink" title="Redis Cluster"></a>Redis Cluster</h3><p>这是Redis.io官方推荐的高可用Redis集群解决方案，采用去中心化思想，这点估计是借鉴了区块链技术中的无中心化思想吧（在下YY的，忽略），方便管理增删服务节点，很重要的一点是文档丰富、生态良好~</p>
+<p><img src="https://shironghui.github.io/images/redis-cluster.jpg" alt="Redis-Cluster"></p>
 
       
     </div>
@@ -466,12 +472,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2019/05/08/Redis常用命令手册/" title="Redis 命令手册"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2019/05/08/编程思想/" title="编程思想 - OOP|AOP|SOA等术语的理解"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2019/05/08/java-class/" title="Java 类与对象"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2018/05/13/Python-基础知识/" title="Python 基础知识"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

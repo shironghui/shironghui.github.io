@@ -47,39 +47,6 @@
   </entry>
   
   <entry>
-    <title>Redis 高可用设计方案</title>
-    <link href="http://shironghui.github.io/2019/05/08/Redis%E9%AB%98%E5%8F%AF%E7%94%A8%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/"/>
-    <id>http://shironghui.github.io/2019/05/08/Redis高可用系统架构设计思路/</id>
-    <published>2019-05-08T03:48:05.000Z</published>
-    <updated>2019-05-15T14:28:40.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p><strong>先介绍几个概念知识，为整体架构作铺垫</strong></p></blockquote><ul><li><p>Codis</p><p>分布式服务框架</p></li><li><p>Twemproxy</p><p>代理服务器</p></li></ul><p>首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。</p><p>当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。<br>此时，我们想到的是加一台服务器作为从库，实现读写分离。<br>但是如果业务场景出现频繁读数据或频繁写数据，那么此时和单点模式基本相同，此时我们有两种方式可以优化系统：</p><ol><li>我们可以充分利用两台服务器实现双写双读模式，此时需要开发进行大量的编码工作，以保障双写双读的可靠性。</li><li>如果想对服务器内存有更大的需求，可以考虑分片，具体实现何种分片还要具体问题具体分析。</li></ol><p>对于上面的方案，我们基本完成了一次系统优化迭代。优势显而易见：代码独立，不依赖于第三方中间件等，但是更明显的应该是缺点：</p><ul><li>系统整体升级困难</li><li>扩缩容非常复杂</li><li>突发性故障屏蔽转移需要很大的人力成本</li></ul><p>坦白的说，只要你稍微思考的远一些，站的角度高一些，你会发现上面的系统是最初级的，有很大的优化空间，而且现在的技术发展可以很好的解决以上问题，那就是代理模式。</p><p>说到代理中间件，就用到了一开始简单的介绍的Codis和Twemproxy。 但是代理也不是完美无缺，比如多多少少会影响一些性能，需要购买多余的机器等问题。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;先介绍几个概念知识，为整体架构作铺垫&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Codis&lt;/p&gt;
-&lt;p&gt;分布式服务框架&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Twemproxy&lt;/p&gt;
-&lt;p&gt;代理服
-      
-    
-    </summary>
-    
-      <category term="Redis" scheme="http://shironghui.github.io/categories/Redis/"/>
-    
-    
-      <category term="Redis" scheme="http://shironghui.github.io/tags/Redis/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Java 类与对象</title>
     <link href="http://shironghui.github.io/2019/05/08/java-class/"/>
     <id>http://shironghui.github.io/2019/05/08/java-class/</id>
@@ -126,6 +93,39 @@
     
     
       <category term="编程思想" scheme="http://shironghui.github.io/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis 高可用设计方案</title>
+    <link href="http://shironghui.github.io/2019/05/08/Redis%E9%AB%98%E5%8F%AF%E7%94%A8%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/"/>
+    <id>http://shironghui.github.io/2019/05/08/Redis高可用系统架构设计思路/</id>
+    <published>2019-05-08T03:48:05.000Z</published>
+    <updated>2019-05-15T15:06:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><strong>先介绍几个概念知识，为整体架构作铺垫</strong></p></blockquote><ul><li><p>Codis</p><p>分布式服务框架</p></li><li><p>Twemproxy</p><p>代理服务器</p></li></ul><p>首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。</p><p><img src="https://shironghui.github.io/images/redis-one.jpg" alt="Redis-Cluster"></p><p>当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。<br>此时，我们想到的是加一台服务器作为从库，实现读写分离。<br>但是如果业务场景出现频繁读数据或频繁写数据，那么此时和单点模式基本相同，此时我们有两种方式可以优化系统：</p><ol><li>我们可以充分利用两台服务器实现双写双读模式，此时需要开发进行大量的编码工作，以保障双写双读的可靠性。</li><li>如果想对服务器内存有更大的需求，可以考虑分片，具体实现何种分片还要具体问题具体分析。</li></ol><p>对于上面的方案，我们基本完成了一次系统优化迭代。优势显而易见：代码独立，不依赖于第三方中间件等，但是更明显的应该是缺点：</p><ul><li>系统整体升级困难</li><li>扩缩容非常复杂</li><li>突发性故障屏蔽转移需要很大的人力成本</li></ul><p>坦白的说，只要你稍微思考的远一些，站的角度高一些，你会发现上面的系统是最初级的，有很大的优化空间，而且现在的技术发展可以很好的解决以上问题，那就是代理模式。</p><h3 id="Redis代理方案"><a href="#Redis代理方案" class="headerlink" title="Redis代理方案"></a>Redis代理方案</h3><p>说到代理中间件，就用到了一开始简单的介绍的Codis和Twemproxy。 但是代理也不是完美无缺，比如多多少少会影响一些性能，需要购买多余的机器等问题。</p><h3 id="Redis-Cluster"><a href="#Redis-Cluster" class="headerlink" title="Redis Cluster"></a>Redis Cluster</h3><p>这是Redis.io官方推荐的高可用Redis集群解决方案，采用去中心化思想，这点估计是借鉴了区块链技术中的无中心化思想吧（在下YY的，忽略），方便管理增删服务节点，很重要的一点是文档丰富、生态良好~</p><p><img src="https://shironghui.github.io/images/redis-cluster.jpg" alt="Redis-Cluster"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;先介绍几个概念知识，为整体架构作铺垫&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Codis&lt;/p&gt;
+&lt;p&gt;分布式服务框架&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Twemproxy&lt;/p&gt;
+&lt;p&gt;代理服
+      
+    
+    </summary>
+    
+      <category term="Redis" scheme="http://shironghui.github.io/categories/Redis/"/>
+    
+    
+      <category term="Redis" scheme="http://shironghui.github.io/tags/Redis/"/>
     
   </entry>
   
