@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>Redis 高可用设计方案</title>
-      <link href="/2019/05/08/Redis%E9%AB%98%E5%8F%AF%E7%94%A8%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/"/>
-      <url>/2019/05/08/Redis%E9%AB%98%E5%8F%AF%E7%94%A8%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/</url>
+      <title>Redis 命令手册</title>
+      <link href="/2019/05/08/Redis%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/"/>
+      <url>/2019/05/08/Redis%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/</url>
       
-        <content type="html"><![CDATA[<p><strong>先介绍几个好东西，为最后的成熟方案作准备</strong></p><ul><li><p>Codis</p><p>分布式服务框架</p></li><li><p>Twemproxy</p><p>代理服务器</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<ol><li><p>GET key<br>查询key对应的值value；</p></li><li><p>SET key value [有效期（可选参数）]<br>设置key的值value，如果key已经存在，则覆盖原有的值；</p></li><li><p>INCR key<br>将key对应的数值加1，如果key不存在，则默认在0的基础上加1，返回1；</p></li><li><p>DECR key<br>将key对应的数值减1，如果key不存在，则默认在0的基础上减1，返回-1；</p></li></ol>]]></content>
       
       
       <categories>
@@ -29,11 +29,11 @@
     
     
     <entry>
-      <title>Redis 命令手册</title>
-      <link href="/2019/05/08/Redis%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/"/>
-      <url>/2019/05/08/Redis%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%89%8B%E5%86%8C/</url>
+      <title>Redis 高可用设计方案</title>
+      <link href="/2019/05/08/Redis%E9%AB%98%E5%8F%AF%E7%94%A8%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/"/>
+      <url>/2019/05/08/Redis%E9%AB%98%E5%8F%AF%E7%94%A8%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF/</url>
       
-        <content type="html"><![CDATA[<ol><li><p>GET key<br>查询key对应的值value；</p></li><li><p>SET key value [有效期（可选参数）]<br>设置key的值value，如果key已经存在，则覆盖原有的值；</p></li><li><p>INCR key<br>将key对应的数值加1，如果key不存在，则默认在0的基础上加1，返回1；</p></li><li><p>DECR key<br>将key对应的数值减1，如果key不存在，则默认在0的基础上减1，返回-1；</p></li></ol>]]></content>
+        <content type="html"><![CDATA[<blockquote><p><strong>先介绍几个概念知识，为整体架构作铺垫</strong></p></blockquote><ul><li><p>Codis</p><p>分布式服务框架</p></li><li><p>Twemproxy</p><p>代理服务器</p></li></ul><p>首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。</p><p>当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。<br>此时，我们想到的是加一台服务器作为从库，实现读写分离。<br>但是如果业务场景出现频繁读数据或频繁写数据，那么此时和单点模式基本相同，此时我们有两种方式可以优化系统：</p><ol><li>我们可以充分利用两台服务器实现双写双读模式，此时需要开发进行大量的编码工作，以保障双写双读的可靠性。</li><li>如果想对服务器内存有更大的需求，可以考虑分片，具体实现何种分片还要具体问题具体分析。</li></ol><p>对于上面的方案，我们基本完成了一次系统优化迭代。优势显而易见：代码独立，不依赖于第三方中间件等，但是更明显的应该是缺点：</p><ul><li>系统整体升级困难</li><li>扩缩容非常复杂</li><li>突发性故障屏蔽转移需要很大的人力成本</li></ul><p>坦白的说，只要你稍微思考的远一些，站的角度高一些，你会发现上面的系统是最初级的，有很大的优化空间，而且现在的技术发展可以很好的解决以上问题，那就是代理模式。</p><p>说到代理中间件，就用到了一开始简单的介绍的Codis和Twemproxy。 但是代理也不是完美无缺，比如多多少少会影响一些性能，需要购买多余的机器等问题。</p>]]></content>
       
       
       <categories>
