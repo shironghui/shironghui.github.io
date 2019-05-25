@@ -17,20 +17,21 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Tris</title>
-  <meta name="description" content="编码是一种态度">
-<meta name="keywords" content="php">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小亭子">
-<meta property="og:url" content="http://shironghui.github.io/index.html">
+  <title>Redis 命令手册 | Tris</title>
+  <meta name="description" content="GET key查询key对应的值value；  SET key value [有效期（可选参数）]设置key的值value，如果key已经存在，则覆盖原有的值；  INCR key将key对应的数值加1，如果key不存在，则默认在0的基础上加1，返回1；  DECR key将key对应的数值减1，如果key不存在，则默认在0的基础上减1，返回-1；  EXISTS key [key2 key3">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 命令手册">
+<meta property="og:url" content="http://shironghui.github.io/2019/05/20/Redis常用命令手册/index.html">
 <meta property="og:site_name" content="小亭子">
-<meta property="og:description" content="编码是一种态度">
+<meta property="og:description" content="GET key查询key对应的值value；  SET key value [有效期（可选参数）]设置key的值value，如果key已经存在，则覆盖原有的值；  INCR key将key对应的数值加1，如果key不存在，则默认在0的基础上加1，返回1；  DECR key将key对应的数值减1，如果key不存在，则默认在0的基础上减1，返回-1；  EXISTS key [key2 key3">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-25T04:35:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小亭子">
-<meta name="twitter:description" content="编码是一种态度">
+<meta name="twitter:title" content="Redis 命令手册">
+<meta name="twitter:description" content="GET key查询key对应的值value；  SET key value [有效期（可选参数）]设置key的值value，如果key已经存在，则覆盖原有的值；  INCR key将key对应的数值加1，如果key不存在，则默认在0的基础上加1，返回1；  DECR key将key对应的数值减1，如果key不存在，则默认在0的基础上减1，返回-1；  EXISTS key [key2 key3">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://shironghui.github.io/index.html">
+  <link rel="canonical" href="http://shironghui.github.io/2019/05/20/Redis常用命令手册/index.html">
   
     <link rel="alternate" href="/atom.xml" title="小亭子" type="application/atom+xml">
   
@@ -39,6 +40,8 @@
   
   <link rel="stylesheet" href="/css/style.css">
   
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css">
   
   
   
@@ -332,235 +335,193 @@
 </aside>
 
   
-  <main class="main" role="main">
   
-  <div class="content article-list">
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Redis常用命令手册" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
+    <div class="article-header">
+      
+        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/编程思想/">编程思想 - OOP|AOP|SOA等术语的理解</a>
+    <h1 class="article-title" itemprop="name">
+      Redis 命令手册
     </h1>
   
 
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/05/20/编程思想/" class="article-date">
-	  <time datetime="2019-05-19T19:28:00.000Z" itemprop="datePublished">5月 20</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/编程思想/">编程思想</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/编程思想/">编程思想</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/编程思想/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/Python-基础知识/">Python 基础知识</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/05/20/Python-基础知识/" class="article-date">
-	  <time datetime="2019-05-19T18:18:30.000Z" itemprop="datePublished">5月 20</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Python/">Python</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Python/">Python</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/Python-基础知识/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/java-class/">Java 类与对象</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/05/20/java-class/" class="article-date">
-	  <time datetime="2019-05-19T17:48:05.000Z" itemprop="datePublished">5月 20</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Java/">Java</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Java/">Java</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/java-class/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/PHP-基础知识/">PHP 基础知识</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/05/20/PHP-基础知识/" class="article-date">
-	  <time datetime="2019-05-19T17:30:00.000Z" itemprop="datePublished">5月 20</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/PHP/">PHP</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/PHP-基础知识/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/Redis高可用系统架构设计思路/">Redis 高可用设计方案</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/05/20/Redis高可用系统架构设计思路/" class="article-date">
-	  <time datetime="2019-05-19T17:08:05.000Z" itemprop="datePublished">5月 20</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Redis/">Redis</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Redis/">Redis</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/Redis高可用系统架构设计思路/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/Redis常用命令手册/">Redis 命令手册</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
+      
+      <div class="article-meta">
+        <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2019/05/20/Redis常用命令手册/" class="article-date">
-	  <time datetime="2019-05-19T16:48:05.000Z" itemprop="datePublished">5月 20</time>
+	  <time datetime="2019-05-19T16:48:05.000Z" itemprop="datePublished">2019-05-20</time>
 	</a>
 </span>
-    
+        
   <span class="article-category">
     <i class="icon icon-folder"></i>
     <a class="article-category-link" href="/categories/Redis/">Redis</a>
   </span>
 
-    
+        
   <span class="article-tag">
     <i class="icon icon-tags"></i>
 	<a class="article-tag-link" href="/tags/Redis/">Redis</a>
   </span>
 
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/Redis常用命令手册/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
 
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/Redis常用命令手册/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <ol>
+<li><p>GET key<br>查询key对应的值value；</p>
+</li>
+<li><p>SET key value [有效期（可选参数）]<br>设置key的值value，如果key已经存在，则覆盖原有的值；</p>
+</li>
+<li><p>INCR key<br>将key对应的数值加1，如果key不存在，则默认在0的基础上加1，返回1；</p>
+</li>
+<li><p>DECR key<br>将key对应的数值减1，如果key不存在，则默认在0的基础上减1，返回-1；</p>
+</li>
+<li><p>EXISTS key [key2 key3 …]<br>用途：判断key是否存在，目前已支持查询多个key是否存在；<br>返回：单个key不存在时返回0，存在时返回存在的key的数量，如1，2，3；</p>
+</li>
+<li><p>EXPIRE key xxx（秒数）<br>将key的超时时间设置为xxx,单位秒；</p>
+</li>
+</ol>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://shironghui.github.io/2019/05/20/Redis常用命令手册/" title="Redis 命令手册" target="_blank" rel="external">http://shironghui.github.io/2019/05/20/Redis常用命令手册/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/shironghui" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/shironghui" target="_blank"><span class="text-dark">伺猫侠</span><small class="ml-1x">Web Developer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/05/20/Redis高可用系统架构设计思路/" title="Redis 高可用设计方案"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
     
   </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-   
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -619,6 +580,30 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
    
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
+
+
+
+
+   
+    
+
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+var gitment = new Gitment({
+  // id默认为当前页面url，如果url后带参数或锚点，gitment要重新初始化
+  // https://github.com/imsun/gitment/issues/55
+  // 解决方案：id:window.location.pathname,或者将id设置为当前页面标题
+  id: 'Redis 命令手册', 
+  owner: 'shironghui', // 可以是你的GitHub用户名，也可以是github id
+  repo: 'shironghui.github.io',
+  oauth: {
+    client_id: '16cc3f04712d9b52e39f',
+    client_secret: '1c7abc44146db106e27f4b24467a408dfcc0916b',
+  }
+})
+gitment.render('comments')
+</script>
 
 
 

@@ -17,20 +17,26 @@
   <meta http-equiv="window-target" content="_top">
   
   
-  <title>Tris</title>
-  <meta name="description" content="编码是一种态度">
-<meta name="keywords" content="php">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小亭子">
-<meta property="og:url" content="http://shironghui.github.io/index.html">
+  <title>Redis 高可用设计方案 | Tris</title>
+  <meta name="description" content="先介绍几个概念知识，为整体架构作铺垫   Codis 分布式服务框架  Twemproxy 代理服务器   首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。  当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。此时，我们想到的是加一台服务">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 高可用设计方案">
+<meta property="og:url" content="http://shironghui.github.io/2019/05/20/Redis高可用系统架构设计思路/index.html">
 <meta property="og:site_name" content="小亭子">
-<meta property="og:description" content="编码是一种态度">
+<meta property="og:description" content="先介绍几个概念知识，为整体架构作铺垫   Codis 分布式服务框架  Twemproxy 代理服务器   首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。  当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。此时，我们想到的是加一台服务">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://shironghui.github.io/images/redis-one.jpg">
+<meta property="og:image" content="https://shironghui.github.io/images/redis-master.jpg">
+<meta property="og:image" content="https://shironghui.github.io/images/redis-proxy.jpg">
+<meta property="og:image" content="https://shironghui.github.io/images/redis-cluster.jpg">
+<meta property="og:updated_time" content="2019-05-25T04:25:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小亭子">
-<meta name="twitter:description" content="编码是一种态度">
+<meta name="twitter:title" content="Redis 高可用设计方案">
+<meta name="twitter:description" content="先介绍几个概念知识，为整体架构作铺垫   Codis 分布式服务框架  Twemproxy 代理服务器   首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。  当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。此时，我们想到的是加一台服务">
+<meta name="twitter:image" content="https://shironghui.github.io/images/redis-one.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://shironghui.github.io/index.html">
+  <link rel="canonical" href="http://shironghui.github.io/2019/05/20/Redis高可用系统架构设计思路/index.html">
   
     <link rel="alternate" href="/atom.xml" title="小亭子" type="application/atom+xml">
   
@@ -39,6 +45,8 @@
   
   <link rel="stylesheet" href="/css/style.css">
   
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css">
   
   
   
@@ -332,235 +340,213 @@
 </aside>
 
   
-  <main class="main" role="main">
   
-  <div class="content article-list">
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Redis高可用系统架构设计思路" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
+    <div class="article-header">
+      
+        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/编程思想/">编程思想 - OOP|AOP|SOA等术语的理解</a>
+    <h1 class="article-title" itemprop="name">
+      Redis 高可用设计方案
     </h1>
   
 
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/05/20/编程思想/" class="article-date">
-	  <time datetime="2019-05-19T19:28:00.000Z" itemprop="datePublished">5月 20</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/编程思想/">编程思想</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/编程思想/">编程思想</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/编程思想/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/Python-基础知识/">Python 基础知识</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/05/20/Python-基础知识/" class="article-date">
-	  <time datetime="2019-05-19T18:18:30.000Z" itemprop="datePublished">5月 20</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Python/">Python</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Python/">Python</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/Python-基础知识/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/java-class/">Java 类与对象</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/05/20/java-class/" class="article-date">
-	  <time datetime="2019-05-19T17:48:05.000Z" itemprop="datePublished">5月 20</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Java/">Java</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Java/">Java</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/java-class/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/PHP-基础知识/">PHP 基础知识</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/05/20/PHP-基础知识/" class="article-date">
-	  <time datetime="2019-05-19T17:30:00.000Z" itemprop="datePublished">5月 20</time>
-	</a>
-</span>
-    
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/PHP/">PHP</a>
-  </span>
-
-    
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/PHP/">PHP</a>
-  </span>
-
-
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/PHP-基础知识/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
-
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/Redis高可用系统架构设计思路/">Redis 高可用设计方案</a>
-    </h1>
-  
-
-  </div>
-  
-  <p class="article-meta">
-    <span class="article-date">
+      
+      <div class="article-meta">
+        <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="/2019/05/20/Redis高可用系统架构设计思路/" class="article-date">
-	  <time datetime="2019-05-19T17:08:05.000Z" itemprop="datePublished">5月 20</time>
+	  <time datetime="2019-05-19T17:08:05.000Z" itemprop="datePublished">2019-05-20</time>
 	</a>
 </span>
-    
+        
   <span class="article-category">
     <i class="icon icon-folder"></i>
     <a class="article-category-link" href="/categories/Redis/">Redis</a>
   </span>
 
-    
+        
   <span class="article-tag">
     <i class="icon icon-tags"></i>
 	<a class="article-tag-link" href="/tags/Redis/">Redis</a>
   </span>
 
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/Redis高可用系统架构设计思路/#comments" class="article-comment-link">评论</a></span>
-    
-  </p>
-</article>
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
 
-    
-      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
-  <div class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/20/Redis常用命令手册/">Redis 命令手册</a>
-    </h1>
-  
 
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/Redis高可用系统架构设计思路/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>先介绍几个概念知识，为整体架构作铺垫</strong></p>
+</blockquote>
+<ul>
+<li><p>Codis</p>
+<p>分布式服务框架</p>
+</li>
+<li><p>Twemproxy</p>
+<p>代理服务器</p>
+</li>
+</ul>
+<p>首先，最简单的Redis应用称为单点模式：即只有一台Redis服务器与客户端直连。</p>
+<p><img src="https://shironghui.github.io/images/redis-one.jpg" alt="Redis-Cluster"></p>
+<p>当QPS不断增加，单点Redis不足以支撑业务的时候，就是最应该优化的时候，毕竟业务驱动技术改进，脱离业务的技术改造都是耍流氓，这话出自业内某位大神，但是真不是鲁迅先生，哈哈。<br>此时，我们想到的是加一台服务器作为从库，实现读写分离。<br>但是如果业务场景出现频繁读数据或频繁写数据，那么此时和单点模式基本相同，此时我们有两种方式可以优化系统：</p>
+<ol>
+<li>我们可以充分利用两台服务器实现双写双读模式，此时需要开发进行大量的编码工作，以保障双写双读的可靠性。</li>
+<li>如果想对服务器内存有更大的需求，可以考虑分片，具体实现何种分片还要具体问题具体分析。</li>
+</ol>
+<p><img src="https://shironghui.github.io/images/redis-master.jpg" alt="Redis-Cluster"></p>
+<p>对于上面的方案，我们基本完成了一次系统优化迭代。优势显而易见：代码独立，不依赖于第三方中间件等，但是更明显的应该是缺点：</p>
+<ul>
+<li>系统整体升级困难</li>
+<li>扩缩容非常复杂</li>
+<li>突发性故障屏蔽转移需要很大的人力成本</li>
+</ul>
+<p>坦白的说，只要你稍微思考的远一些，站的角度高一些，你会发现上面的系统是最初级的，有很大的优化空间，而且现在的技术发展可以很好的解决以上问题，那就是代理模式。</p>
+<h3 id="Redis代理方案"><a href="#Redis代理方案" class="headerlink" title="Redis代理方案"></a>Redis代理方案</h3><p>说到代理中间件，就用到了一开始简单的介绍的Codis和Twemproxy。 但是代理也不是完美无缺，比如多多少少会影响一些性能，需要购买多余的机器等问题。</p>
+<p><img src="https://shironghui.github.io/images/redis-proxy.jpg" alt="Redis-Cluster"></p>
+<h3 id="Redis-Cluster"><a href="#Redis-Cluster" class="headerlink" title="Redis Cluster"></a>Redis Cluster</h3><p>这是Redis.io官方推荐的高可用Redis集群解决方案，采用去中心化思想，这点估计是借鉴了区块链技术中的无中心化思想吧（在下YY的，忽略），方便管理增删服务节点，很重要的一点是文档丰富、生态良好~</p>
+<p><img src="https://shironghui.github.io/images/redis-cluster.jpg" alt="Redis-Cluster"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://shironghui.github.io/2019/05/20/Redis高可用系统架构设计思路/" title="Redis 高可用设计方案" target="_blank" rel="external">http://shironghui.github.io/2019/05/20/Redis高可用系统架构设计思路/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/shironghui" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt>
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/shironghui" target="_blank"><span class="text-dark">伺猫侠</span><small class="ml-1x">Web Developer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
   </div>
+</div>
+
+
+    </div>
+  </article>
   
-  <p class="article-meta">
-    <span class="article-date">
-    <i class="icon icon-calendar-check"></i>
-	<a href="/2019/05/20/Redis常用命令手册/" class="article-date">
-	  <time datetime="2019-05-19T16:48:05.000Z" itemprop="datePublished">5月 20</time>
-	</a>
-</span>
     
-  <span class="article-category">
-    <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Redis/">Redis</a>
-  </span>
+  <section id="comments">
+  	
 
     
-  <span class="article-tag">
-    <i class="icon icon-tags"></i>
-	<a class="article-tag-link" href="/tags/Redis/">Redis</a>
-  </span>
+  </section>
 
 
-    <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/20/Redis常用命令手册/#comments" class="article-comment-link">评论</a></span>
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
     
-  </p>
-</article>
-
+    <li class="prev">
+      <a href="/2019/05/20/PHP-基础知识/" title="PHP 基础知识"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/05/20/Redis常用命令手册/" title="Redis 命令手册"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
     
   </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫">
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class>
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-   
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -619,6 +605,30 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
    
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
+
+
+
+
+   
+    
+
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script>
+var gitment = new Gitment({
+  // id默认为当前页面url，如果url后带参数或锚点，gitment要重新初始化
+  // https://github.com/imsun/gitment/issues/55
+  // 解决方案：id:window.location.pathname,或者将id设置为当前页面标题
+  id: 'Redis 高可用设计方案', 
+  owner: 'shironghui', // 可以是你的GitHub用户名，也可以是github id
+  repo: 'shironghui.github.io',
+  oauth: {
+    client_id: '16cc3f04712d9b52e39f',
+    client_secret: '1c7abc44146db106e27f4b24467a408dfcc0916b',
+  }
+})
+gitment.render('comments')
+</script>
 
 
 
